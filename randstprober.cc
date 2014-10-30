@@ -664,6 +664,7 @@ main(int argc, char **argv)
 	    assert(fp != NULL);
 	    DestList *dests = new DestList(1500000);
 
+#ifdef PREPROCESSTTL
             if(iter % 2 == 0) //XXX: kvbp
 	    {
 		    ReadIPList(fp, dests, 1000);
@@ -671,6 +672,7 @@ main(int argc, char **argv)
 		    probers = 1;
 	    }
             else
+#endif
 	    {
 		    ReadIPList(fp, dests, 1500000);
 		    pfindRateLimitHops = NULL;
@@ -692,6 +694,7 @@ main(int argc, char **argv)
 	    ReadOldinfo(dests);
 	    Prober(dests, c, probers);
 
+#ifdef PREPROCESSTTL
 	    if(iter % 2 == 0) //XXX: kvbp
 	    {
                 for(int j=0; j < 256; j++)
@@ -707,6 +710,7 @@ main(int argc, char **argv)
                     printf("\n");
                 }
 	    }
+#endif
 
 	    nextDest = numTraced = countRecords = 0;
 
